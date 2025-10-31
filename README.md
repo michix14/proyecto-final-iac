@@ -4,7 +4,7 @@ Proyecto de Infraestructura como Código (IaC) que utiliza tecnologías modernas
 
 ## 🎯 Descripción
 
-Este repositorio contiene la configuración e implementación de infraestructura como código, combinando con NodeJs para la lógica de aplicación y HCL (HashiCorp Configuration Language) para la gestión de infraestructura, probablemente con Terraform.
+Este repositorio contiene la configuración e implementación de infraestructura como código, combinando con NodeJs para la lógica de aplicación y HCL (HashiCorp Configuration Language) para la gestión de infraestructura con Terraform.
 
 ## 🛠️ Tecnologías Utilizadas
 
