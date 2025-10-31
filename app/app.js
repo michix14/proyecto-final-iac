@@ -9,7 +9,22 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(express.json());
-const DATA_FILE = path.join(__dirname, "data.txt");
+
+// 1. Define el directorio de datos que coincide con tu volumen de Docker
+const DATA_DIR = "/app/data";
+
+// 2. Asegurar que ese directorio si exista 
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    console.log(`Directorio de datos creado en: ${DATA_DIR}`);
+  }
+} catch (err) {
+  console.error("Error al crear el directorio de datos:", err);
+}
+
+// 3. Define la ruta completa del archivo DENTRO del directorio de datos
+const DATA_FILE = path.join(DATA_DIR, "data.txt");
 
 app.get("/", (_req, res) => {
   res.json({ status: "ok", service: "Hola Microservicio 2" });
