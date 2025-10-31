@@ -4,5 +4,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install --production
 COPY . .
+# Volumen persistente para datos
+VOLUME ["/app/data"]
 EXPOSE 3000
 CMD ["npm", "start"]
