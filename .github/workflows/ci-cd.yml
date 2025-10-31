@@ -85,7 +85,6 @@ jobs:
           APP_PORT: ${{ env.APP_PORT }}
         run: |
           set -euo pipefail
-          # Pasar variables al shell remoto antes de ejecutar el script
           ssh -o IdentitiesOnly=no -o StrictHostKeyChecking=yes \
               ec2-user@"$HOST" "IMAGE='$IMAGE' APP_PORT='$APP_PORT' bash -s" << 'EOF'
           set -euxo pipefail
@@ -96,10 +95,16 @@ jobs:
           fi
 
           docker network inspect appnet >/dev/null 2>&1 || docker network create appnet
+          
+          # Crear directorio en el host para datos persistentes
+          mkdir -p /home/ec2-user/app-data
+          
           docker ps -q --filter "name=demo-microservice-lab" | grep -q . && docker stop demo-microservice-lab || true
           docker ps -aq --filter "name=demo-microservice-lab" | grep -q . && docker rm demo-microservice-lab || true
 
           docker pull "$IMAGE"
           docker run -d --name demo-microservice-lab --restart unless-stopped \
-            --network appnet -p 80:"$APP_PORT" "$IMAGE"
+            --network appnet -p 80:"$APP_PORT" \
+            -v /home/ec2-user/app-data:/app/data \
+            "$IMAGE"
           EOF
