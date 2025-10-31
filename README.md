@@ -25,7 +25,7 @@ Este repositorio contiene la configuración e implementación de infraestructura
 
 - Node.js (v14 o superior)
 - Terraform (v1.0 o superior)
-- Docker (opcional, para containerización)
+- Docker
 - Git
 
 ### Instalación
