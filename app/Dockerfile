@@ -19,7 +19,7 @@ COPY --chown=node:node package*.json ./
 # 'npm install' crea 'node_modules', así que lo corremos como 'node'
 # para que los permisos sean correctos.
 USER node
-RUN npm install --production
+RUN npm install
 
 # 6. Copiar el resto del código de la aplicación como 'node'
 COPY --chown=node:node . .
