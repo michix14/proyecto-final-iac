@@ -1,6 +1,6 @@
 # Proyecto Final IaC
 
-Proyecto de Infraestructura como Código (IaC) que utiliza tecnologías modernas para automatizar y gestionar la infraestructura de manera eficiente y escalable.
+Proyecto de Infraestructura como Código (IaC) que utiliza tecnologías modernas para automatizar y gestionar la infraestructura de manera eficiente y escalable y que contiene un pipeline para el CI/CD.
 
 ## 🎯 Descripción
 
