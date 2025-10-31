@@ -13,7 +13,7 @@ variable "region" {
 variable "admin_cidr_ssh" {
     description = "Bloque CIDR autorizado para ssh"
     type = string
-    default = "158.172.226.0/24"
+    default = "0.0.0.0/0"
 }
 
 variable "public_ssh_key" {
