@@ -16,7 +16,7 @@ app.get("/", (_req, res) => {
 });
 
 // guardar datos nombre - valor
-app.post("/api/data", (req, res) => {
+app.post("/data", (req, res) => {
     const { nombre, valor } = req.body;
     if (!nombre || !valor) {
         return res.status(400).json({
@@ -44,7 +44,7 @@ app.post("/api/data", (req, res) => {
 });
 
 // Leer los datos guardados
-app.get("/api/data", (_req, res) => {
+app.get("/data", (_req, res) => {
     try {
         if (!fs.existsSync(DATA_FILE)) {
             return res.json({ message: "No hay datos guardados", data: [] });

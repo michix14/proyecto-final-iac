@@ -49,7 +49,7 @@ test("GET / responde con el JSON esperado", async () => {
   assert.equal(parsed.service, "Hola Microservicio 2");
 });
 
-test("GET /api/data devuelve array vacío si no hay datos", async () => {
+test("GET /data devuelve array vacío si no hay datos", async () => {
   // Limpiar archivo antes del test
   if (fs.existsSync(DATA_FILE)) {
     fs.unlinkSync(DATA_FILE);
@@ -58,7 +58,7 @@ test("GET /api/data devuelve array vacío si no hay datos", async () => {
   const server = app.listen(0);
   const { port } = server.address();
 
-  const { statusCode, body } = await makeRequest("GET", port, "/api/data");
+  const { statusCode, body } = await makeRequest("GET", port, "/data");
   await new Promise((r) => server.close(r));
 
   assert.equal(statusCode, 200);
@@ -67,7 +67,7 @@ test("GET /api/data devuelve array vacío si no hay datos", async () => {
   assert.deepEqual(parsed.data, []);
 });
 
-test("POST /api/data guarda datos correctamente", async () => {
+test("POST /data guarda datos correctamente", async () => {
   // Limpiar archivo antes del test
   if (fs.existsSync(DATA_FILE)) {
     fs.unlinkSync(DATA_FILE);
@@ -77,7 +77,7 @@ test("POST /api/data guarda datos correctamente", async () => {
   const { port } = server.address();
 
   const testData = { nombre: "test", valor: "123" };
-  const { statusCode, body } = await makeRequest("POST", port, "/api/data", testData);
+  const { statusCode, body } = await makeRequest("POST", port, "/data", testData);
   
   await new Promise((r) => server.close(r));
 
@@ -94,11 +94,11 @@ test("POST /api/data guarda datos correctamente", async () => {
   assert.ok(fileContent.includes("123"));
 });
 
-test("POST /api/data valida campos requeridos", async () => {
+test("POST /data valida campos requeridos", async () => {
   const server = app.listen(0);
   const { port } = server.address();
 
-  const { statusCode, body } = await makeRequest("POST", port, "/api/data", {});
+  const { statusCode, body } = await makeRequest("POST", port, "/data", {});
   await new Promise((r) => server.close(r));
 
   assert.equal(statusCode, 400);
@@ -106,7 +106,7 @@ test("POST /api/data valida campos requeridos", async () => {
   assert.equal(parsed.error, "Falta de campos");
 });
 
-test("GET /api/data devuelve datos guardados", async () => {
+test("GET /data devuelve datos guardados", async () => {
   // Limpiar y preparar archivo con datos de prueba
   const testData1 = { nombre: "user1", valor: "100", timestamp: new Date().toISOString() };
   const testData2 = { nombre: "user2", valor: "200", timestamp: new Date().toISOString() };
@@ -116,7 +116,7 @@ test("GET /api/data devuelve datos guardados", async () => {
   const server = app.listen(0);
   const { port } = server.address();
 
-  const { statusCode, body } = await makeRequest("GET", port, "/api/data");
+  const { statusCode, body } = await makeRequest("GET", port, "/data");
   await new Promise((r) => server.close(r));
 
   assert.equal(statusCode, 200);
